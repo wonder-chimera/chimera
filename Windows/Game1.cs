@@ -32,7 +32,8 @@ namespace Windows
             dataFileManager = new DataFileManager<string>(
                 System.IO.Directory.GetCurrentDirectory() + "\\" + "Save\\settings.txt",
                 "kanssujdao",
-                false
+                false,
+                SerializeType.Binary
             );
 
             base.Initialize();

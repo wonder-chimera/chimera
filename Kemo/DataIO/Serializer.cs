@@ -15,7 +15,6 @@ namespace Kemo.DataIO
           
           Binary方式を実装
          
-         
          */
 
     /// <summary>
@@ -139,6 +138,5 @@ namespace Kemo.DataIO
                 throw;
             }
         }
-
     }
 }
