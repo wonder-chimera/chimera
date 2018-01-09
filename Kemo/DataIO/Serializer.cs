@@ -95,6 +95,7 @@ namespace Kemo.DataIO
                     break;
 
                 case SerializeType.Binary:
+                    //未実装
                     throw new System.NotImplementedException();
 
                 default:
@@ -124,7 +125,7 @@ namespace Kemo.DataIO
                         break;
 
                     case SerializeType.Binary:
-
+                        //未実装
                         throw new System.NotImplementedException();
 
                     default:
