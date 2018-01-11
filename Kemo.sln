@@ -3,59 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D1E1D454-1410-49B4-9D32-FB8270549296}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KemoGameMaker", "KemoGameMaker", "{209DC788-BE01-48C5-8ECF-9A003D681C2A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KemoGameMaker", "KemoGameMaker", "{D698DD32-5EA7-403F-8BE2-5FB3DA424185}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Android", "Android\Android.csproj", "{BBD8871C-894E-404D-8983-384C39B4CADA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kemo", "Kemo\Kemo.csproj", "{974F91FB-D855-423C-A1EB-1BBA53AA64BA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows", "Windows\Windows.csproj", "{DA34EC25-CA9F-4E8C-9B74-ACA2AD3EC6A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KemoGameMaker.Windows", "KemoGameMaker.Windows\KemoGameMaker.Windows.csproj", "{122E75AB-64C2-4E33-AE4B-A1D5EA206838}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Debug|x86.Build.0 = Debug|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Debug|x86.Deploy.0 = Debug|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Release|x86.ActiveCfg = Release|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Release|x86.Build.0 = Release|Any CPU
-		{BBD8871C-894E-404D-8983-384C39B4CADA}.Release|x86.Deploy.0 = Release|Any CPU
-		{974F91FB-D855-423C-A1EB-1BBA53AA64BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{974F91FB-D855-423C-A1EB-1BBA53AA64BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{974F91FB-D855-423C-A1EB-1BBA53AA64BA}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{974F91FB-D855-423C-A1EB-1BBA53AA64BA}.Debug|x86.Build.0 = Debug|Any CPU
-		{974F91FB-D855-423C-A1EB-1BBA53AA64BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{974F91FB-D855-423C-A1EB-1BBA53AA64BA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{974F91FB-D855-423C-A1EB-1BBA53AA64BA}.Release|x86.ActiveCfg = Release|Any CPU
-		{974F91FB-D855-423C-A1EB-1BBA53AA64BA}.Release|x86.Build.0 = Release|Any CPU
-		{DA34EC25-CA9F-4E8C-9B74-ACA2AD3EC6A4}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{DA34EC25-CA9F-4E8C-9B74-ACA2AD3EC6A4}.Debug|Any CPU.Build.0 = Debug|x86
-		{DA34EC25-CA9F-4E8C-9B74-ACA2AD3EC6A4}.Debug|x86.ActiveCfg = Debug|x86
-		{DA34EC25-CA9F-4E8C-9B74-ACA2AD3EC6A4}.Debug|x86.Build.0 = Debug|x86
-		{DA34EC25-CA9F-4E8C-9B74-ACA2AD3EC6A4}.Release|Any CPU.ActiveCfg = Release|x86
-		{DA34EC25-CA9F-4E8C-9B74-ACA2AD3EC6A4}.Release|x86.ActiveCfg = Release|x86
-		{DA34EC25-CA9F-4E8C-9B74-ACA2AD3EC6A4}.Release|x86.Build.0 = Release|x86
+		{122E75AB-64C2-4E33-AE4B-A1D5EA206838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122E75AB-64C2-4E33-AE4B-A1D5EA206838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122E75AB-64C2-4E33-AE4B-A1D5EA206838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122E75AB-64C2-4E33-AE4B-A1D5EA206838}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BBD8871C-894E-404D-8983-384C39B4CADA} = {D1E1D454-1410-49B4-9D32-FB8270549296}
-		{974F91FB-D855-423C-A1EB-1BBA53AA64BA} = {D698DD32-5EA7-403F-8BE2-5FB3DA424185}
-		{DA34EC25-CA9F-4E8C-9B74-ACA2AD3EC6A4} = {D1E1D454-1410-49B4-9D32-FB8270549296}
+		{122E75AB-64C2-4E33-AE4B-A1D5EA206838} = {209DC788-BE01-48C5-8ECF-9A003D681C2A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8151909A-2AF4-408D-8206-AED5F7025ADD}

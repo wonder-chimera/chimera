@@ -35,7 +35,7 @@ namespace Kemo.DataIO
         /// </summary>
         Complete,
         /// <summary>
-        /// エラー確認をしなかった、又は他の結果以外の状態
+        /// エラー確認をしなかった、又は予期していない状態
         /// </summary>
         None
     }
@@ -57,23 +57,33 @@ namespace Kemo.DataIO
     /// 
     /// <para>
     /// 複数のデータを扱いたい場合は、複数の<see cref="DataFileManager{Type}"/>を使用するか、
-    /// AllDataFileManagerを使ってくださ（未実装）
+    /// DataFileListManagerを使ってくださ（未実装）
     /// </para>
     /// 
     /// </summary>
     /// <typeparam name="Type">保存・読み込みするデータの型</typeparam>
     public class DataFileManager<Type>
     {
+        /// <summary>
+        /// ファイルが暗号化されているかのチェック文字列
+        /// </summary>
         readonly byte[] cryptoTag = Encoding.UTF8.GetBytes("[ISCRYPTO]");
-        byte[] key;
+
+        /// <summary>
+        /// 暗号化の鍵
+        /// </summary>
+        byte[] key = new byte[0];
+
         /// <summary>
         /// ファイルを保存するパスを表します。
         /// </summary>
         public string FilePath { get; }
+
         /// <summary>
         /// このマネージャーがファイルを読み書きするとき、暗号化・復号をするかを表します。
         /// </summary>
         public bool IsCrypto { get; }
+
         /// <summary>
         /// このマネージャーがオブジェクトをファイル化する時のシリアライズ法を表します。
         /// </summary>
@@ -125,39 +135,30 @@ namespace Kemo.DataIO
         {
             Save(saveObject, IsCrypto);
         }
-
-        /// <summary>
-        /// 暗号化がOFFで、かつファイルが暗号化されている場合は暗号化を解きます。
-        /// ただし、コンストラクターでパスワードが指定されていないときは動作しません。
-        /// </summary>
-        public void FileDecrypto()
-        {
-            Type save;
-            Load(true, out save, false);
-            Save(save);
-        }
-
+        
         /// <summary>
         /// エラーチェック無しのロード。ロードしたデータを返します。
+        /// 暗号化されていた場合は、自動的に複合します。
         /// 読み込めなかった場合、エラーが発生します。
         /// </summary>
         /// <returns></returns>
         public Type Load()
         {
             Type ret;
-            Load(IsCrypto, out ret, false);
+            Load(FileIsCrypto(), out ret, false);
 
             return ret;
         }
 
         /// <summary>
         /// エラーをチェックし、<paramref name="loadData"/>にファイルをロードします。エラーチェックの結果を<see cref="LoadState"/>で返します。
+        /// 暗号化されていた場合は、自動的に複合します。
         /// </summary>
         /// <param name="loadData">データを格納する変数</param>
         /// <returns></returns>
         public LoadState TryLoad(out Type loadData)
         {
-            return Load(IsCrypto, out loadData, true);
+            return Load(FileIsCrypto(), out loadData, true);
         }
 
         protected bool FileIsCrypto()
