@@ -6,6 +6,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
 using System.Security.Cryptography;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Kemo.DataIO
 {
@@ -13,8 +14,6 @@ namespace Kemo.DataIO
      
          ToDo
           
-          Binary方式を実装
-         
          */
 
     /// <summary>
@@ -70,7 +69,11 @@ namespace Kemo.DataIO
 
                 throw;
             }
-
+            catch (System.Runtime.Serialization.SerializationException)
+            {
+                returnObj = default(Type);
+                return false;
+            }
             return true;
         }
 
@@ -94,8 +97,9 @@ namespace Kemo.DataIO
                     break;
 
                 case SerializeType.Binary:
-                    //未実装
-                    throw new System.NotImplementedException();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    ret = (Type)formatter.Deserialize(stream);
+                    break;
 
                 default:
                     throw new System.NotImplementedException();
@@ -112,30 +116,24 @@ namespace Kemo.DataIO
         /// <param name="typeObj">変換するデータ</param>
         public void Serialize<Type>(Stream stream, Type typeObj)
         {
-            try
+            switch (SerializeType)
             {
-                switch (SerializeType)
-                {
-                    case SerializeType.XML:
+                case SerializeType.XML:
 
-                        // saveObjectをXMLにして、ストリームに書き込み
-                        XmlSerializer serializer = new XmlSerializer(typeof(Type));
-                        serializer.Serialize(stream, typeObj);
-                        break;
+                    // saveObjectをXMLにして、ストリームに書き込み
+                    XmlSerializer serializer = new XmlSerializer(typeof(Type));
+                    serializer.Serialize(stream, typeObj);
+                    break;
 
-                    case SerializeType.Binary:
-                        //未実装
-                        throw new System.NotImplementedException();
+                case SerializeType.Binary:
 
-                    default:
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, typeObj);
+                    break;
 
-                        throw new System.NotImplementedException();
-                }
-            }
-            catch (System.Exception)
-            {
+                default:
 
-                throw;
+                    throw new System.NotImplementedException();
             }
         }
     }
