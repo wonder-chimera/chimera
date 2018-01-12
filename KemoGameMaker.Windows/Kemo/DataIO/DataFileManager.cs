@@ -98,7 +98,7 @@ namespace Kemo.DataIO
         /// <param name="serializeType">ファイル化に使用するシリアライズ法</param>
         public DataFileManager(string filePath, SerializeType serializeType = SerializeType.XML)
         {
-            serializer = new Serializer(SerializeType.XML);
+            serializer = new Serializer(serializeType);
 
             FilePath = filePath;
             IsCrypto = false;
@@ -135,7 +135,7 @@ namespace Kemo.DataIO
         {
             Save(saveObject, IsCrypto);
         }
-        
+
         /// <summary>
         /// エラーチェック無しのロード。ロードしたデータを返します。
         /// 暗号化されていた場合は、自動的に複合します。
