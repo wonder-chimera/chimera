@@ -62,6 +62,7 @@ namespace Kemo.DataIO
     /// 
     /// </summary>
     /// <typeparam name="Type">保存・読み込みするデータの型</typeparam>
+    /// 
     public class DataFileManager<Type>
     {
         /// <summary>
@@ -87,24 +88,9 @@ namespace Kemo.DataIO
         /// <summary>
         /// このマネージャーがオブジェクトをファイル化する時のシリアライズ法を表します。
         /// </summary>
-        public SerializeType SerializeType { get { return serializer.SerializeType; } }
+        public SerializeType SerializeType { get { return Serializer.SerializeType; } }
 
-        private Serializer serializer { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="filePath">ファイルを保存するパス</param>
-        /// <param name="serializeType">ファイル化に使用するシリアライズ法</param>
-        public DataFileManager(string filePath, SerializeType serializeType = SerializeType.XML)
-        {
-            serializer = new Serializer(serializeType);
-
-            FilePath = filePath;
-            IsCrypto = false;
-
-            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-        }
+        private Serializer Serializer { get; }
 
         /// <summary>
         /// 
@@ -113,9 +99,17 @@ namespace Kemo.DataIO
         /// <param name="key">暗号化・復号に使用するパスワード</param>
         /// <param name="isCrypto">暗号化・復号のON・OFF（trueでON）</param>
         /// <param name="serializeType">ファイル化に使用するシリアライズ法</param>
-        public DataFileManager(string filePath, string key, bool isCrypto = true, SerializeType serializeType = SerializeType.XML)
-            : this(filePath, serializeType)
+        public DataFileManager(string filePath, SerializeType serializeType = SerializeType.XML, string key = null, bool isCrypto = false)
         {
+            if (isCrypto && (key == null || key.Length == 0))
+            {
+                throw new System.ArgumentException("暗号化のkeyが設定されていません");
+            }
+
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+            FilePath = filePath;
+            Serializer = new Serializer(serializeType);
             IsCrypto = isCrypto;
 
             List<byte> keyB = Encoding.UTF8.GetBytes(key).ToList();
@@ -159,6 +153,15 @@ namespace Kemo.DataIO
         public LoadState TryLoad(out Type loadData)
         {
             return Load(FileIsCrypto(), out loadData, true);
+        }
+
+        /// <summary>
+        /// ファイルが存在するかを確認します。
+        /// </summary>
+        /// <returns></returns>
+        public bool Exists()
+        {
+            return File.Exists(FilePath);
         }
 
         protected bool FileIsCrypto()
@@ -206,14 +209,14 @@ namespace Kemo.DataIO
                 fileStream.Write(iv, 0, 8);
 
                 // saveObjectをシリアルにして、暗号化ストリームに書き込み
-                serializer.Serialize(cryptoStream, saveObject);
+                Serializer.Serialize(cryptoStream, saveObject);
                 // 暗号化ストリームくろーず
                 cryptoStream.Close();
             }
             else
             {
                 // saveObjectをシリアルにして、ストリームに書き込み
-                serializer.Serialize(fileStream, saveObject);
+                Serializer.Serialize(fileStream, saveObject);
             }
             // くろーず
             fileStream.Close();
@@ -249,7 +252,7 @@ namespace Kemo.DataIO
 
                     if (tryLoad)
                     {
-                        if (serializer.TryDeserialize(cryptoStream, out loadData))
+                        if (Serializer.TryDeserialize(cryptoStream, out loadData))
                         {
                             returnState = LoadState.Complete;
                         }
@@ -260,7 +263,7 @@ namespace Kemo.DataIO
                     }
                     else
                     {
-                        loadData = serializer.Deserialize<Type>(cryptoStream);
+                        loadData = Serializer.Deserialize<Type>(cryptoStream);
                     }
                     // くろーず
                     cryptoStream.Close();
@@ -271,7 +274,7 @@ namespace Kemo.DataIO
 
                     if (tryLoad)
                     {
-                        if (serializer.TryDeserialize(fileStream, out loadData))
+                        if (Serializer.TryDeserialize(fileStream, out loadData))
                         {
                             returnState = LoadState.Complete;
                         }
@@ -282,7 +285,7 @@ namespace Kemo.DataIO
                     }
                     else
                     {
-                        loadData = serializer.Deserialize<Type>(fileStream);
+                        loadData = Serializer.Deserialize<Type>(fileStream);
                     }
                 }
             }
