@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 
 namespace Kemo.DataIO
 {
@@ -75,6 +76,8 @@ namespace Kemo.DataIO
         /// </summary>
         byte[] key = new byte[0];
 
+        public string KeyString { get; }
+
         /// <summary>
         /// ファイルを保存するパスを表します。
         /// </summary>
@@ -103,8 +106,10 @@ namespace Kemo.DataIO
         {
             if (isCrypto && (key == null || key.Length == 0))
             {
-                throw new System.ArgumentException("暗号化のkeyが設定されていません");
+                throw new ArgumentException("暗号化のkeyが設定されていません");
             }
+
+            KeyString = key;
 
             Directory.CreateDirectory(Path.GetDirectoryName(filePath));
 
