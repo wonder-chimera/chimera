@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-using System.Xml;
+﻿using System;
 using System.IO;
-using System.Security.Cryptography;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Kemo.DataIO
 {
@@ -59,7 +56,7 @@ namespace Kemo.DataIO
             {
                 returnObj = Deserialize<Type>(stream);
             }
-            catch (System.InvalidOperationException ex )
+            catch (InvalidOperationException ex )
             {
                 if (ex.InnerException is XmlException)
                 {
@@ -69,7 +66,7 @@ namespace Kemo.DataIO
 
                 throw;
             }
-            catch (System.Runtime.Serialization.SerializationException)
+            catch (SerializationException)
             {
                 returnObj = default(Type);
                 return false;
@@ -102,7 +99,7 @@ namespace Kemo.DataIO
                     break;
 
                 default:
-                    throw new System.NotImplementedException();
+                    throw new NotImplementedException();
             }
 
             return ret;
@@ -133,7 +130,7 @@ namespace Kemo.DataIO
 
                 default:
 
-                    throw new System.NotImplementedException();
+                    throw new NotImplementedException();
             }
         }
     }
