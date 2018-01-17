@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,10 +43,12 @@
   <ItemGroup>
     <Compile Include="Kemo\DataIO\DataFileManager.cs" />
     <Compile Include="Kemo\DataIO\Serializer.cs" />
+    <Compile Include="Kemo\Tag.cs" />
+    <Compile Include="Kemo\GameMaker\Object\DrawableGameObject.cs" />
+    <Compile Include="Kemo\GameMaker\Object\GameComponentCollectionExtensions.cs" />
+    <Compile Include="Kemo\GameMaker\Object\GameObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Kemo\GameMaker\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
